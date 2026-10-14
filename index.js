@@ -21,11 +21,13 @@ const configuredClientOrigins = (process.env.CLIENT_URI || "")
   .map((origin) => origin.trim())
   .map((origin) => origin.replace(/\/+$/, ""))
   .filter(Boolean);
+const defaultClientOrigins =
+  process.env.NODE_ENV === "production"
+    ? ["https://selling-point-taupe.vercel.app"]
+    : ["http://localhost:3000", "http://127.0.0.1:3000"];
 const clientOrigins = new Set([
   ...configuredClientOrigins,
-  ...(process.env.NODE_ENV === "production"
-    ? []
-    : ["http://localhost:3000", "https://selling-point-taupe.vercel.app", "http://127.0.0.1:3000"]),
+  ...defaultClientOrigins,
 ]);
 const port = Number(process.env.PORT) || 5000;
 
