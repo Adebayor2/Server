@@ -19,12 +19,13 @@ const app = express();
 const configuredClientOrigins = (process.env.CLIENT_URI || "")
   .split(",")
   .map((origin) => origin.trim())
+  .map((origin) => origin.replace(/\/+$/, ""))
   .filter(Boolean);
 const clientOrigins = new Set([
   ...configuredClientOrigins,
   ...(process.env.NODE_ENV === "production"
     ? []
-    : ["http://localhost:3000", "https://selling-point-taupe.vercel.app/", "http://127.0.0.1:3000"]),
+    : ["http://localhost:3000", "https://selling-point-taupe.vercel.app", "http://127.0.0.1:3000"]),
 ]);
 const port = Number(process.env.PORT) || 5000;
 

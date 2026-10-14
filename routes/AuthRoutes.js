@@ -26,7 +26,7 @@ router.post("/reset-password", resetPassword);
 router.post("/reset-password/:token", resetPassword);
 
 // Authenticated user routes
-router.post("/logout", authMiddleware, Logout);
+router.post("/logout", Logout);
 router.get("/user", authMiddleware, getCurrentUser);
 router.put("/user", authMiddleware, updateUser);
 router.patch("/user", authMiddleware, updateUser);
